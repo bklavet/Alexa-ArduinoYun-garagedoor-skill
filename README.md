@@ -61,5 +61,7 @@ As for the arduino yun,  you will want to get familiar with the arduino IDE soft
 In the sketch, the Yun is looking for a command coming from the web, when it recognizes it, it changes the pin status.  There is no Security on this, so keep that in mind with what you use this for.
 
 When this is done, you should be able to have alexa set the digital pin 3 to low and cause the relay to close for one second and then open.	
-If you want to test the arduino yun from your lan you can enter this into your browser /your ip/arduino/digital/13/1  this should light pin13 /your ip/arduino/digital/13/0 should turn it off.
+If you want to test the arduino yun from your lan you can enter this into your browser
+ /your ip/arduino/digital/13/1               this should light pin13 
+ /your ip/arduino/digital/13/0               should turn it off.
 	
