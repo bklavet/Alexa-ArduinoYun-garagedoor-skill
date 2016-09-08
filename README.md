@@ -55,7 +55,11 @@ Go BACK to your developer.amazon.com account and go to the Alexa page.
 	Click Next.
 	If all is good, you will be able be done for now. There is no need to go to the "Publishing Information" 
 	
-As for the arduino yun,  you will want to get familiar with the arduino IDE software and load the sketch above to the yun.
+# For the Arduino Yun
+	
+As for the arduino yun,  you will want to get familiar with the arduino IDE software and load the sketch alexaBridgeexample to the yun.  This is a quick and ugly hack on the Bridge example.
+In the sketch, the Yun is looking for a command coming from the web, when it recognizes it, it changes the pin status.  There is no Security on this, so keep that in mind with what you use this for.
 
 When this is done, you should be able to have alexa set the digital pin 3 to low and cause the relay to close for one second and then open.	
+If you want to test the arduino yun from your lan you can enter this into your browser /your ip/arduino/digital/13/1  this should light pin13 /your ip/arduino/digital/13/0 should turn it off.
 	
