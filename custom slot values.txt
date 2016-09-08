@@ -1,4 +1,4 @@
 shut
 open
 stop
-close
+clothes

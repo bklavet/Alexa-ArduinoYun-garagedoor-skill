@@ -37,8 +37,8 @@ void setup() {
   Bridge.begin();
   
 
-  // Listen for incoming connection only from localhost
-  // (no one from the external network could connect)
+ 
+  // server starts looking out on port 80
   server.noListenOnLocalhost();
   server.begin();
 }
@@ -125,11 +125,7 @@ void analogCommand(YunClient client) {
 
     // Send feedback to client
           client.println("HTTP/1.1 200 OK");
-          client.println("Content-Type: application/json;charset=utf-8");
-          client.println("{\"ret\":\"ok\"}");
-          client.println("Server: Arduino");
-          client.println("Connection: close");
-    
+          
 
     // Update datastore key with the current pin value
     String key = "D";
@@ -142,10 +138,7 @@ void analogCommand(YunClient client) {
 
     // Send feedback to client
           client.println("HTTP/1.1 200 OK");
-          client.println("Content-Type: application/json;charset=utf-8");
-          client.println("{\"ret\":\"ok\"}");
-          client.println("Server: Arduino");
-          client.println("Connection: close");
+          
     
 
     // Update datastore key with the current pin value

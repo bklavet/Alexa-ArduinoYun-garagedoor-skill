@@ -47,7 +47,7 @@ doorControl.prototype.intentHandlers = {
                 
                 // Same button is used
 				case "open":
-				case "close":
+				case "clothes": //I know this is spelled wrong, but alexa didn't like the standalone command close, so this is my work around for it
 				case "shut":
 				case "stop":
                       path = '/arduino/digital/3/0';
