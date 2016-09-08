@@ -1,0 +1,13 @@
+{
+  "intents": [
+    {
+      "intent": "doorIntent",
+      "slots": [
+        {
+          "name": "Control",
+          "type": "Control_List"
+        }
+      ]
+    }
+  ]
+}

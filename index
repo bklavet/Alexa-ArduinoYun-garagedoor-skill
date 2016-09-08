@@ -1,0 +1,82 @@
+var http = require('http'); // if going through a proxy that uses SSL change to "require('https');"
+
+// Your external IP. Alexa can only access publically-accessible IPs. No LAN access unfortunately.
+// Make sure to set up port forwarding on port 8080 to your DTV's IP on your router.
+// In my case I had to move receiver to DMZ
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+var local_ip = 'XXX.XXX.XXX.XXX';
+//externalIP or FQDN //////////////////////////////////////////////////////////////////////////
+//var local_ip = '<some fqdn>';
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * App ID for the skill
+ */
+ //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+var APP_ID = ""; 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+* The AlexaSkill prototype and helper functions
+ */
+var AlexaSkill = require('./AlexaSkill');
+   
+var doorControl = function () {
+    AlexaSkill.call(this, APP_ID);
+};
+
+
+// Extend AlexaSkill
+doorControl.prototype = Object.create(AlexaSkill.prototype);
+doorControl.prototype.constructor = doorControl;
+
+//Ignore Certificate errors if using HTTPS communication
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
+doorControl.prototype.intentHandlers = {
+        doorIntent: function (intent, session, response) {
+        
+        //No matter what she wants to tell you her opinion.
+        
+        function satisfyAlexa() {
+                        response.tell("OK");
+                        };
+        
+        // Obtain User Intent
+        switch(intent.slots.Control.value) {
+                
+                // Same button is used
+				case "open":
+				case "close":
+				case "shut":
+				case "stop":
+                      path = '/arduino/digital/3/0';
+                break;
+           
+				default:
+                         {
+                         response.tell("oops");
+                      }
+                break;
+
+				
+        } 
+		var options = {
+                     host: local_ip,
+					 port: 80,
+                     path: '' + path, // Modify if path is prefixed 
+                     method: 'POST'
+					 
+                    };
+          var req = http.request(options, satisfyAlexa);
+          req.end();						
+        }
+}
+
+
+exports.handler = function (event, context) {
+       
+        var DoorControl = new doorControl();
+        DoorControl.execute(event, context);
+        
+};
