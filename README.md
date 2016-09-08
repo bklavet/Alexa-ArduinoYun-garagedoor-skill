@@ -15,7 +15,9 @@ Not so bad.
 
 # For Custom Slot Setup walkthrough
 
-This is a walkthrough to set up a skill using the contents of the "Custom Slot skill" folder.
+This is a walkthrough to set up this skill I am hoping to add a youtube walkthrough and a demo video aswell.
+
+till then...
 	
 Open the "index" file and replace with your AppID
 
@@ -53,4 +55,7 @@ Go BACK to your developer.amazon.com account and go to the Alexa page.
 	Click Next.
 	If all is good, you will be able be done for now. There is no need to go to the "Publishing Information" 
 	
+As for the arduino yun,  you will want to get familiar with the arduino IDE software and load the sketch above to the yun.
+
+When this is done, you should be able to have alexa set the digital pin 3 to low and cause the relay to close for one second and then open.	
 	

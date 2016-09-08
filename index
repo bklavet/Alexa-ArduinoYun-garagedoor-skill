@@ -1,8 +1,8 @@
 var http = require('http'); // if going through a proxy that uses SSL change to "require('https');"
 
 // Your external IP. Alexa can only access publically-accessible IPs. No LAN access unfortunately.
-// Make sure to set up port forwarding on port 8080 to your DTV's IP on your router.
-// In my case I had to move receiver to DMZ
+// Make sure to set up port forwarding on port 80 to your YUN's IP on your router.
+// or move to DMZ
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 var local_ip = 'XXX.XXX.XXX.XXX';
