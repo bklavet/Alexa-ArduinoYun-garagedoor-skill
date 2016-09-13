@@ -43,11 +43,15 @@ http://www.nearbus.net/
 you will want to sign up and setup a login.
 Select the New Device tab
 you will see a number of parameters and values that need entry.  Not all of them are necessary here are the important ones
-Device Name = What ever you want i used "Arduino"
-Shared Secret= 8 digit char/number example "12345678" This will be used in the Arduino template sketch
-PIN = 4 digit pin I put one in, but I am not sure if it is needed or not
-Device Identifier = this will be provided and will be needed in the arduino sketch
-Unclick Configured as VCMU
+* Device Name = What ever you want i used "Arduino"
+
+* Shared Secret= 8 digit char/number example "12345678" This will be used in the Arduino template sketch
+
+* PIN = 4 digit pin I put one in, but I am not sure if it is needed or not
+
+* Device Identifier = this will be provided and will be needed in the arduino sketch
+
+* Unclick Configured as VCMU
 
 click "Setup"
 
@@ -64,9 +68,7 @@ towards the top you will see a section titled Agent Configuration Parameters
  
  What is happening in the sketch is the Yun is waiting to receive a command to close the relay, when it recieves this,
  it closes the relay for 1 second and then opens the relay.  Then the Arduino Yun sends a reset command back to Nearbus
- so everything goes back to the way it was.  This allows us to set up a skill with the echo that will give us 
- the same result of a closed relay for one second regardless of external influences (like people manually operating
- the garage door.
+ so everything goes back to the way it was. If this was not sent, the relay would continue to close and open every two seconds forever!
  
  Load this sketch to the arduino and set up your relay to digital pin 3 
  connect the arduino Yun to your internet connect via Wifi or ethernet
@@ -78,5 +80,63 @@ towards the top you will see a section titled Agent Configuration Parameters
  If it does, Great!  now we can build an alexa skill to control this with our voice!
  
 # Alexa Skill Setup
-coming soon! 
+I would download notepad++ to edit the index file
+https://notepad-plus-plus.org/
+the part will be using the contents of the src folder from this github
+Open the index file with notpad++ and edit the path (line 53) to match your Device Identifier, users name and password.
+Save!
+
+
+Login to your developer.amazon.com account and go to the Alexa page.
+https://developer.amazon.com/alexa
+    Click "Get Started" under the "Alexa Skills Kit"
+	Click "Add a new Skill" at the top right.
+	Make sure "Custom Interaction Model" is selected
+	Give it a Name
+	Put in the "Invocation Name".  This is what you will use to "tell" Alexa. I used "garage door"
+	Click SAVE.  This will generate your ApplicationID and will be used when creating the Lambda Function
+
+Next log into aws lambda https://aws.amazon.com/lambda/	
+under the Compute section you will see Lambda, select it
+
+Login to your "aws" Management console for Lambda and create a new Function
+Once you create a new Lambda Function, do not choose a Blueprint (click Skip). 
+The next thing we need to do is configure a trigger for our skill
+* make sure that at the top left by your logon name it shows N. Virginia
+* beside the lambda icon click on the box and select Alexa Skills Kit
+* slect next
+* Type in a function name
+* for code entry type select upload zip
+Place the index and AlexaSkill files in a zip file and choose to upload.
+	Role should be: "lambda_basic_execution"
+	Once you select the role, a new browser window will open. Click the "Allow" button in this new window.
+	Click "Next" in the  original window to Review the new function.
+	Click "Create Function"
+	Select the "Alexa Skills Kit" item and Click "Submit"
+	
+Take note of the ARN value at the top right of the screen.  You will need this in the next step.
+
+Go BACK to your developer.amazon.com account and go to the Alexa page.
+    Click "Get Started" under the "Alexa Skills Kit"
+    Click "Edit" next to the Skill you already created.
+	Click Next
+	Copy the Contents of the "IntentSchema" file from the "Custom Slot skill" folder above into the "IntentSchema" text area
+	Click on "Add Slot Type" by the section named Custom Slot Type.  Enter Control_List for the "Enter Type" section.  Cut and paste the custom slot values.txt file in the section labled "EnterValues".  Click OK
+	Copy the Contents of the "SampleUtterance" file from the "Custom Slot skill" folder above into the "SampleUtterance" text area
+	Click "Next"
+	If everything is good, you will now be able to put the ARN value you noted from the Lambda Function you previously created.
+	Click on the "Lambda ARN..." bullet and paste that value in.
+	Click "No" on the Account Linking for now.
+	Click Next.
+	If all is good, you will be able be done for now. There is no need to go to the "Publishing Information" 
+	
+	you should now be able to test the skill, if you used "garage door" for your invocation name, you could say:
+	Alexa tell the garage door to open
+	Alexa tell the garage door to shut
+	Alexa ask the garage door to close it please
+	
+	the one command that I am having trouble with is:
+	Alexa tell the garage door to close.  I think "close" must be some sort of hard command that alexa uses to close out of a skill or interaction.
+	so make sure to say "close it" so it works.
+	
 
