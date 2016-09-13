@@ -1,20 +1,17 @@
 var http = require('http'); // if going through a proxy that uses SSL change to "require('https');"
 
-// Your external IP. Alexa can only access publically-accessible IPs. No LAN access unfortunately.
-// Make sure to set up port forwarding on port 80 to your YUN's IP on your router.
-// or move to DMZ
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-var local_ip = 'XXX.XXX.XXX.XXX';
-//externalIP or FQDN //////////////////////////////////////////////////////////////////////////
-//var local_ip = '<some fqdn>';
+var local_ip = 'nearbus.net';
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
  * App ID for the skill
  */
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-var APP_ID = ""; 
+var APP_ID = "amzn1.echo-sdk-ams.app.f2a36c58-f9a7-478d-8689-18b0a5ce9b60"; 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
 * The AlexaSkill prototype and helper functions
@@ -47,15 +44,15 @@ doorControl.prototype.intentHandlers = {
                 
                 // Same button is used
 				case "open":
-				case "clothes": //I know this is spelled wrong, but alexa didn't like the standalone command close, so this is my work around for it
+				case "close": 
 				case "shut":
 				case "stop":
-                      path = '/arduino/digital/3/0';
+                      path = '/v1/api_transp/NB10XXXX?user=XXXXXXX&pass=XXXXXX&method=POST&reg00=1';
                 break;
            
 				default:
                          {
-                         response.tell("oops");
+                         response.tell("No, I'm sort of busy.  Could you do it?");
                       }
                 break;
 
@@ -63,9 +60,9 @@ doorControl.prototype.intentHandlers = {
         } 
 		var options = {
                      host: local_ip,
-					 port: 80,
-                     path: '' + path, // Modify if path is prefixed 
-                     method: 'POST'
+                     path: '' + path // Modify if path is prefixed 
+					
+					
 					 
                     };
           var req = http.request(options, satisfyAlexa);
