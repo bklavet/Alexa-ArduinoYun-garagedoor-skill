@@ -1,5 +1,5 @@
 #Skill to have the Amazon Echo open/close the garage door.
-
+See the code controlling the relay with the amazon echo dot: https://youtu.be/FrGq5vr-82Q
 
 Physical things that are needed to duplicate this project:
 * Amazon Echo
