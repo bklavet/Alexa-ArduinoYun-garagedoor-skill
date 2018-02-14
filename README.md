@@ -109,6 +109,23 @@ The next thing we need to do is configure a trigger for our skill
 * for code entry type select upload zip
 Place the index and AlexaSkill files in a zip file and choose to upload.
 	Role should be: "lambda_basic_execution"
+	#############################################################################
+	if LAMBDA FUNCTION CAN"T SELECT lambda_basic_execution.
+Lambda needs an IAM role to send your function to the DTV receiver.
+
+this is how:
+To create an IAM role (execution role)
+
+Sign in to the AWS Management Console and open the IAM console at https://console.aws.amazon.com/iam/.
+
+Follow the steps in Creating a Role to Delegate Permissions to an AWS Service in the IAM User Guide to create an IAM role (execution role). As you follow the steps to create a role, note the following:
+
+In Role Name, use a name that is unique within your AWS account (for example, lambda-basic-execution).
+
+In Select Role Type, choose AWS Service Roles, and then choose AWS Lambda. This grants the AWS Lambda service permissions to assume the role.
+
+In Attach Policy, choose AWSLambdaBasicExecutionRole.
+	###############################################################################
 	Once you select the role, a new browser window will open. Click the "Allow" button in this new window.
 	Click "Next" in the  original window to Review the new function.
 	Click "Create Function"
